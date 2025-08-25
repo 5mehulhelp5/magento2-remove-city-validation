@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/system_file.xsd">
+    <system>
+        <section id="customer">
+            <group id="address">
+                <field id="enable_city_validation" translate="label" type="select" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable City Validation</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="use_builtin_city_regex" translate="label" type="select" sortOrder="210" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Use Built-in City Validation Regex?</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enable_city_validation">1</field>
+                    </depends>
+                </field>
+                <field id="city_validation_regex" translate="label" type="textarea" sortOrder="220" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>City Validation Regex</label>
+                    <validate>validate-regex</validate>
+                    <frontend_class>validate-length maximum-length-255</frontend_class>
+                    <depends>
+                        <field id="use_builtin_city_regex">0</field>
+                    </depends>
+                </field>
+
+                <field id="enable_street_validation" translate="label" type="select" sortOrder="230" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Street Validation</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="use_builtin_street_regex" translate="label" type="select" sortOrder="240" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Use Built-in Street Validation Regex?</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enable_street_validation">1</field>
+                    </depends>
+                </field>
+                <field id="street_validation_regex" translate="label" type="textarea" sortOrder="250" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Street Validation Regex</label>
+                    <validate>validate-regex</validate>
+                    <frontend_class>validate-length maximum-length-255</frontend_class>
+                    <depends>
+                        <field id="use_builtin_street_regex">0</field>
+                    </depends>
+                </field>
+
+                <field id="enable_telephone_validation" translate="label" type="select" sortOrder="260" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Telephone Validation</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="use_builtin_telephone_regex" translate="label" type="select" sortOrder="270" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Use Built-in Telephone Validation Regex?</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enable_telephone_validation">1</field>
+                    </depends>
+                </field>
+                <field id="telephone_validation_regex" translate="label" type="textarea" sortOrder="280" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Telephone Validation Regex</label>
+                    <validate>validate-regex</validate>
+                    <frontend_class>validate-length maximum-length-255</frontend_class>
+                    <depends>
+                        <field id="use_builtin_telephone_regex">0</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
