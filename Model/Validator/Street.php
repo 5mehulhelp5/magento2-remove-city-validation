@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Elgentos\RemoveCityValidation\Model\Validator;
+namespace Elgentos\ImprovedCustomerAddressValidation\Model\Validator;
 
 use Magento\Customer\Model\Validator\Street as OriginalStreetValidator;
 use Magento\Framework\App\Config\ScopeConfigInterface;
@@ -27,10 +27,6 @@ class Street extends OriginalStreetValidator
             return true;
         }
 
-        if ($this->scopeConfig->isSetFlag('customer/address/use_builtin_street_regex', ScopeInterface::SCOPE_STORE)) {
-            return parent::isValid($customer);
-        }
-
         foreach ($customer->getStreet() as $street) {
             if (!$this->isValidStreet($street)) {
                 parent::_addMessages([[
@@ -50,13 +46,17 @@ class Street extends OriginalStreetValidator
      */
     private function isValidStreet($streetValue)
     {
-        if ($streetValue != null) {
-            $pattern = $this->scopeConfig->getValue('customer/address/street_validation_regex', ScopeInterface::SCOPE_STORE);
-            if (preg_match($pattern, $streetValue, $matches)) {
-                return $matches[0] == $streetValue;
-            }
+        if ($streetValue == null) {
+            return true;
         }
 
-        return true;
+        if ($this->scopeConfig->isSetFlag('customer/address/use_builtin_street_regex', ScopeInterface::SCOPE_STORE)) {
+            $pattern = "/(?:[\p{L}\p{M}\"[],-.'’`&\s\d]){1,255}+/u";
+        } else {
+            $pattern = $this->scopeConfig->getValue('customer/address/street_validation_regex',
+                ScopeInterface::SCOPE_STORE);
+        }
+
+        return (bool) preg_match($pattern, (string) $streetValue);
     }
 }

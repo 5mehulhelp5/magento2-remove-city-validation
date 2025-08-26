@@ -1,7 +1,9 @@
-# elgentos/magento2-remove-city-validation
+# elgentos/magento2-improved-customer-address-validation
 
-This removes the validation on the city field on the address object in Magento 2, which has been changed in Magento 2.4.8.
+The validation for customer addresses has been updated in Magento 2.4.8, and not for the better.
 
-After installing this extension, you won't receive the "Invalid city. Please use ....." error.
+With this extension, you have finer control over the validation of the City, Street and Telephone fields on the customer address entity.
 
-<img width="1097" height="492" alt="Image" src="https://github.com/user-attachments/assets/d7308e10-e140-44cd-9ca3-53ea2aeaba29" />
+You can find the configuration under Stores > Configuration > Customer > Customer Configuration > Name and Address Options;
+
+<img width="1186" height="629" alt="Image" src="https://github.com/user-attachments/assets/ef970b2e-90f9-486a-adf0-53a6a55cb48a" />

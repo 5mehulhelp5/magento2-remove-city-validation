@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Elgentos\RemoveCityValidation\Model\Validator;
+namespace Elgentos\ImprovedCustomerAddressValidation\Model\Validator;
 
 use Magento\Customer\Model\Validator\City as OriginalCityValidator;
 use Magento\Framework\App\Config\ScopeConfigInterface;
@@ -25,13 +25,9 @@ class City extends OriginalCityValidator
             return true;
         }
 
-        if ($this->scopeConfig->isSetFlag('customer/address/use_builtin_city_regex', ScopeInterface::SCOPE_STORE)) {
-            return parent::isValid($customer);
-        }
-
         if (!$this->isValidCity($customer->getCity())) {
             parent::_addMessages([[
-                'city' => "Invalid City"
+                'city' => 'Invalid City'
             ]]);
         }
 
@@ -45,13 +41,16 @@ class City extends OriginalCityValidator
      */
     private function isValidCity($cityValue)
     {
-        if ($cityValue != null) {
-            $pattern = $this->scopeConfig->getValue('customer/address/city_validation_regex', ScopeInterface::SCOPE_STORE);
-            if (preg_match($pattern, $cityValue, $matches)) {
-                return $matches[0] == $cityValue;
-            }
+        if ($cityValue == null) {
+            return true;
         }
 
-        return true;
+        if ($this->scopeConfig->isSetFlag('customer/address/use_builtin_city_regex', ScopeInterface::SCOPE_STORE)) {
+            $pattern = '/(?:[\p{L}\p{M}\s\-\']{1,100})/u';
+        } else {
+            $pattern = $this->scopeConfig->getValue('customer/address/city_validation_regex', ScopeInterface::SCOPE_STORE);
+        }
+
+        return (bool) preg_match($pattern, (string) $cityValue);
     }
 }

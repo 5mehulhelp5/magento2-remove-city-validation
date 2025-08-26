@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Elgentos\RemoveCityValidation\Model\Validator;
+namespace Elgentos\ImprovedCustomerAddressValidation\Model\Validator;
 
 use Magento\Customer\Model\Validator\Telephone as OriginalTelephoneValidator;
 use Magento\Framework\App\Config\ScopeConfigInterface;
@@ -25,13 +25,9 @@ class Telephone extends OriginalTelephoneValidator
             return true;
         }
 
-        if ($this->scopeConfig->isSetFlag('customer/address/use_builtin_telephone_regex', ScopeInterface::SCOPE_STORE)) {
-            return parent::isValid($customer);
-        }
-
         if (!$this->isValidTelephone($customer->getTelephone())) {
             parent::_addMessages([[
-                'telephone' => "Invalid Phone Number"
+                'telephone' => 'Invalid Phone Number'
             ]]);
         }
 
@@ -45,13 +41,16 @@ class Telephone extends OriginalTelephoneValidator
      */
     private function isValidTelephone($telephoneValue)
     {
-        if ($telephoneValue != null) {
-            $pattern = $this->scopeConfig->getValue('customer/address/telephone_validation_regex', ScopeInterface::SCOPE_STORE);
-            if (preg_match($pattern, (string) $telephoneValue, $matches)) {
-                return $matches[0] == $telephoneValue;
-            }
+        if ($telephoneValue == null) {
+            return true;
         }
 
-        return true;
+        if ($this->scopeConfig->isSetFlag('customer/address/use_builtin_telephone_regex', ScopeInterface::SCOPE_STORE)) {
+            $pattern = '/(?:[\d\s\+\-\()]{1,20})/u';
+        } else {
+            $pattern = $this->scopeConfig->getValue('customer/address/telephone_validation_regex', ScopeInterface::SCOPE_STORE);
+        }
+
+        return (bool) preg_match($pattern, (string) $telephoneValue);
     }
 }

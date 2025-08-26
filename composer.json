@@ -1,6 +1,6 @@
 {
-    "name": "elgentos/magento2-remove-city-validation",
-    "description": "Magento 2 module to remove city validation rules",
+    "name": "elgentos/magento2-improved-customer-address-validation",
+    "description": "Magento 2 module to disable or adjust customer address field validation such as street, city and telephone",
     "require": {
         "magento/framework": "*",
         "magento/module-customer": "*"
@@ -16,7 +16,7 @@
             "registration.php"
         ],
         "psr-4": {
-            "Elgentos\\RemoveCityValidation\\": ""
+            "Elgentos\\ImprovedCustomerAddressValidation\\": ""
         }
     }
 }
