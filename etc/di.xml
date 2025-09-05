@@ -3,4 +3,5 @@
     <preference for="Magento\Customer\Model\Validator\City" type="Elgentos\ImprovedCustomerAddressValidation\Model\Validator\City" />
     <preference for="Magento\Customer\Model\Validator\Street" type="Elgentos\ImprovedCustomerAddressValidation\Model\Validator\Street" />
     <preference for="Magento\Customer\Model\Validator\Telephone" type="Elgentos\ImprovedCustomerAddressValidation\Model\Validator\Telephone" />
+    <preference for="Magento\Customer\Model\Validator\Name" type="Elgentos\ImprovedCustomerAddressValidation\Model\Validator\Name" />
 </config>

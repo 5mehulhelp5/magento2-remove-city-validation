@@ -3,9 +3,11 @@
     <default>
         <customer>
             <address>
+                <enable_name_validation>1</enable_name_validation>
                 <enable_city_validation>1</enable_city_validation>
                 <enable_street_validation>1</enable_street_validation>
                 <enable_telephone_validation>1</enable_telephone_validation>
+                <use_builtin_name_regex>1</use_builtin_name_regex>
                 <use_builtin_city_regex>1</use_builtin_city_regex>
                 <use_builtin_street_regex>1</use_builtin_street_regex>
                 <use_builtin_telephone_regex>1</use_builtin_telephone_regex>

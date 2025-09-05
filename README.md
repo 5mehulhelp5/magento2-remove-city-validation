@@ -2,7 +2,7 @@
 
 The validation for customer addresses has been updated in Magento 2.4.8, and not for the better.
 
-With this extension, you have finer control over the validation of the City, Street and Telephone fields on the customer address entity.
+With this extension, you have finer control over the validation of the Name, City, Street and Telephone fields on the customer address entity.
 
 You can find the configuration under Stores > Configuration > Customer > Customer Configuration > Name and Address Options;
 
